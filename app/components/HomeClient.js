@@ -57,6 +57,7 @@ const css = `
   #mobile-menu { display: none; }
 
   @media (max-width: 900px) {
+    .hs video { pointer-events: none; }
     .hs:not(:first-child) { display: none; }
     #hero-bars { display: none !important; }
     .nav-links { display: none; }
@@ -560,36 +561,36 @@ export default function HomeClient() {
     var slides=[].slice.call(document.querySelectorAll('.hs'))
     var bars=[].slice.call(document.querySelectorAll('.hbar'))
     var vidCur=0, vidTimer=null, INTERVAL=8000
-
-    function startFill(i){
-      bars.forEach(function(b){var f=b.querySelector('.hbar-fill');f.style.transition='none';f.style.width='0%'})
-      requestAnimationFrame(function(){requestAnimationFrame(function(){
-        var f=bars[i].querySelector('.hbar-fill')
-        f.style.transition='width '+INTERVAL+'ms linear';f.style.width='100%'
-      })})
-    }
-    function goVid(n){
-      var total=slides.length,next=((n%total)+total)%total
-      if(next===vidCur) return
-      slides[vidCur].classList.remove('on');bars[vidCur].classList.remove('on')
-      var oldV=slides[vidCur].querySelector('video')
-      if(oldV){oldV.pause();(function(v){setTimeout(function(){v.currentTime=0},1500)})(oldV)}
-      vidCur=next
-      slides[vidCur].classList.add('on');bars[vidCur].classList.add('on')
-      var newV=slides[vidCur].querySelector('video');if(newV) newV.play().catch(function(){})
-      startFill(vidCur);clearInterval(vidTimer)
+    if (hasMouse) {
+      function startFill(i){
+        bars.forEach(function(b){var f=b.querySelector('.hbar-fill');f.style.transition='none';f.style.width='0%'})
+        requestAnimationFrame(function(){requestAnimationFrame(function(){
+          var f=bars[i].querySelector('.hbar-fill')
+          f.style.transition='width '+INTERVAL+'ms linear';f.style.width='100%'
+        })})
+      }
+      function goVid(n){
+        var total=slides.length,next=((n%total)+total)%total
+        if(next===vidCur) return
+        slides[vidCur].classList.remove('on');bars[vidCur].classList.remove('on')
+        var oldV=slides[vidCur].querySelector('video')
+        if(oldV){oldV.pause();(function(v){setTimeout(function(){v.currentTime=0},1500)})(oldV)}
+        vidCur=next
+        slides[vidCur].classList.add('on');bars[vidCur].classList.add('on')
+        var newV=slides[vidCur].querySelector('video');if(newV) newV.play().catch(function(){})
+        startFill(vidCur);clearInterval(vidTimer)
+        vidTimer=setInterval(function(){goVid(vidCur+1)},INTERVAL)
+      }
+      startFill(0)
       vidTimer=setInterval(function(){goVid(vidCur+1)},INTERVAL)
-    }
-    startFill(0)
-    vidTimer=setInterval(function(){goVid(vidCur+1)},INTERVAL)
-    bars.forEach(function(b,i){b.addEventListener('click',function(){goVid(i)})})
-    var hx=0, heroEl=document.getElementById('hero')
-    if(heroEl){
-      heroEl.addEventListener('touchstart',function(e){hx=e.touches[0].clientX},{passive:true})
-      heroEl.addEventListener('touchend',function(e){var diff=hx-e.changedTouches[0].clientX;if(Math.abs(diff)>50) goVid(vidCur+(diff>0?1:-1))},{passive:true})
-    }
-
-    return () => { clearInterval(vidTimer) }
+      bars.forEach(function(b,i){b.addEventListener('click',function(){goVid(i)})})
+      var hx=0, heroEl=document.getElementById('hero')
+      if(heroEl){
+        heroEl.addEventListener('touchstart',function(e){hx=e.touches[0].clientX},{passive:true})
+        heroEl.addEventListener('touchend',function(e){var diff=hx-e.changedTouches[0].clientX;if(Math.abs(diff)>50) goVid(vidCur+(diff>0?1:-1))},{passive:true})
+      }
+}
+    return () => { clearInterval(vidTimer) } 
   }, [])
 
   return (
