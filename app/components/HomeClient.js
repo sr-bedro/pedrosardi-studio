@@ -57,6 +57,8 @@ const css = `
   #mobile-menu { display: none; }
 
   @media (max-width: 900px) {
+    .hs:not(:first-child) { display: none; }
+    #hero-bars { display: none !important; }
     .nav-links { display: none; }
     #nav { grid-template-columns: 44px 1fr 44px; padding: 18px 20px; }
     #nav.stuck { padding: 12px 20px; }
@@ -395,8 +397,17 @@ export default function HomeClient() {
 
     var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
+    window.matchMedia('(hover: hover) and (pointer: fine)').addEventListener('change', function() {
+      location.reload() })
+      
     // ── MOBILE VIDEO SWAP
     if (!hasMouse) {
+      // Poster mobile
+      var v0 = document.getElementById('hero-vid-0')
+      if (v0) {
+      var mp = v0.getAttribute('data-mobile-poster')
+      if (mp) v0.setAttribute('poster', mp)
+      }
       var heroVid0 = document.getElementById('hero-vid-0')
       if (heroVid0) { var mSrc0 = heroVid0.querySelector('source'); if (mSrc0) { mSrc0.src = '/assets/hero-mobile.mp4'; heroVid0.load(); heroVid0.play().catch(function(){}) } }
       var heroVid1 = document.getElementById('hero-vid-1')
@@ -634,7 +645,7 @@ export default function HomeClient() {
         {/* 0: HERO */}
         <section className="fp-sec visible" id="hero">
           <div className="hs on" data-i="0">
-            <video id="hero-vid-0" autoPlay muted loop playsInline preload="metadata" poster="/assets/hero-poster.jpg">
+            <video id="hero-vid-0" autoPlay muted loop playsInline preload="metadata" poster="/assets/hero-poster.webp" data-mobile-poster="/assets/hero-mobile-poster.webp">
               <source src="/assets/hero.mp4" type="video/mp4" />
             </video>
           </div>
