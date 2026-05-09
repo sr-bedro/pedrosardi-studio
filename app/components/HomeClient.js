@@ -57,6 +57,7 @@ const css = `
   #mobile-menu { display: none; }
 
   @media (max-width: 900px) {
+    .hs { pointer-events: none; }
     .hs video { pointer-events: none; }
     .hs:not(:first-child) { display: none; }
     #hero-bars { display: none !important; }
