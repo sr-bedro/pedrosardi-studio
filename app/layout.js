@@ -61,8 +61,9 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* display=swap → texto visible inmediatamente, mejora LCP */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" type="image/png" href="/assets/favicon.png" />
@@ -76,6 +77,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        {/* lazyOnload → GTM carga después de que la página ya es usable, mejora TBT */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NRK5LP0V9Z"
           strategy="lazyOnload"

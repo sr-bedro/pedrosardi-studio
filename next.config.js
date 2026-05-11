@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   devIndicators: false,
+  compress: true,
 
-  // Optimiza headers para assets estáticos
+  // Usa browserslist para el compilador SWC — elimina JS antiguo innecesario
+  experimental: {
+    browsersListForSwc: true,
+  },
+
+  // Cache de 1 año para assets estáticos
   async headers() {
     return [
       {
@@ -16,9 +22,6 @@ const nextConfig = {
       },
     ]
   },
-
-  // Compresión automática
-  compress: true,
 }
 
 module.exports = nextConfig
