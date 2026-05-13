@@ -473,7 +473,7 @@ export default function CvClient() {
                 {label:'LinkedIn', sub:'pedroesardi', href:'https://www.linkedin.com/in/pedroesardi/'},
                 {label:'Instagram', sub:'@pedrosardi.studio', href:'https://www.instagram.com/pedrosardi.studio/'},
                 {label:'YouTube', sub:'@pedrosardi.studio', href:'https://www.youtube.com/@pedrosardi.studio'},
-                {label:'IMUTES', sub:'Masterclass D5 Render — 18+ horas', href:'http://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup'},
+                {label:'IMUTES', sub:'Masterclass D5 Render — 18+ horas', href:'https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render'},
                 {label:'OVETA', sub:'oveta.studio', href:'https://oveta.studio'},
               ].map(function(l){return (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener" className="cl-item">

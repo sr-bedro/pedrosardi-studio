@@ -335,7 +335,7 @@ export default function CursoClient() {
           Portfolio
         </Link>
         <span className="nav-brand">Pedro <span>Sardi</span></span>
-        <a href="http://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup" target="_blank" rel="noopener" className="nav-cta">Adquirir curso</a>
+        <a href="https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render" target="_blank" rel="noopener" className="nav-cta">Adquirir curso</a>
       </nav>
 
       {/* HERO */}
@@ -351,7 +351,7 @@ export default function CursoClient() {
           <p className="hero-sub">Desde cero hasta el render final. Más de 18 horas de contenido estructurado, con clases bonus que se siguen sumando.</p>
           <div className="hero-div"></div>
           <div className="cta-wrap">
-            <a href="http://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup" target="_blank" rel="noopener" className="btn-primary">
+            <a href="https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render" target="_blank" rel="noopener" className="btn-primary">
               Adquirir en Imutes
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </a>
@@ -494,7 +494,7 @@ export default function CursoClient() {
         <h2 className="cta-title a">Empezá<br />a rendir<br /><em>diferente.</em></h2>
         <p className="cta-sub a d1">Más de 18 horas de masterclass con clases bonus que se siguen sumando. Dos años de acceso en IMUTES.</p>
         <div className="cta-actions a d2">
-          <a href="http://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup" target="_blank" rel="noopener" className="btn-primary">
+          <a href="https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render" target="_blank" rel="noopener" className="btn-primary">
             Adquirir en IMUTES
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </a>

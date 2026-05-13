@@ -688,7 +688,7 @@ export default function HomeClient() {
                 </div>
               </div>
               <div className="mc-banner-actions">
-                <a href="http://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup"
+                <a href="https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render"
                    target="_blank" rel="noopener" className="mc-btn-p">
                   Adquirir
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
