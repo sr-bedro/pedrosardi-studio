@@ -1,6 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { IMUTES_CURSO, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
 
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -289,7 +290,7 @@ export default function CvClient() {
           Inicio
         </Link>
         <span className="nav-brand">Pedro <span>Sardi</span></span>
-        <a href="https://wa.me/595974534159" target="_blank" rel="noopener" className="nav-pill">Contactar</a>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener" className="nav-pill">Contactar</a>
       </nav>
 
       {/* HERO — centrado */}
@@ -314,7 +315,7 @@ export default function CvClient() {
             <div className="hs"><span className="hs-n">360°</span><span className="hs-l">tours virtuales</span></div>
           </div>
           <div className="hero-actions">
-            <a href="https://wa.me/595974534159" target="_blank" rel="noopener" className="btn-gold">Contactar por WhatsApp</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener" className="btn-gold">Contactar por WhatsApp</a>
             <a href="#proyectos" className="btn-ghost">Ver trabajos</a>
           </div>
         </div>
@@ -483,12 +484,12 @@ export default function CvClient() {
             </div>
             <div className="cl a d2">
               {[
-                {label:'WhatsApp', sub:'+595 974 534 159', href:'https://wa.me/595974534159'},
-                {label:'LinkedIn', sub:'pedroesardi', href:'https://www.linkedin.com/in/pedroesardi/'},
-                {label:'Instagram', sub:'@pedrosardi.studio', href:'https://www.instagram.com/pedrosardi.studio/'},
-                {label:'YouTube', sub:'@pedrosardi.studio', href:'https://www.youtube.com/@pedrosardi.studio'},
-                {label:'IMUTES', sub:'Masterclass D5 Render — 18+ horas', href:'https://imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup/?afiliado=d5-render'},
-                {label:'OVETA', sub:'oveta.studio', href:'https://oveta.studio'},
+                {label:'WhatsApp', sub:'+595 974 534 159', href:WHATSAPP_URL},
+                {label:'LinkedIn', sub:'pedroesardi', href:LINKEDIN_URL},
+                {label:'Instagram', sub:'@pedrosardi.studio', href:INSTAGRAM_URL},
+                {label:'YouTube', sub:'@pedrosardi.studio', href:YOUTUBE_URL},
+                {label:'IMUTES', sub:'Masterclass D5 Render — 18+ horas', href:IMUTES_CURSO},
+                {label:'OVETA', sub:'oveta.studio', href:OVETA_URL},
               ].map(function(l){return (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener" className="cl-item">
                   <div><div className="cl-name">{l.label}</div><div className="cl-sub">{l.sub}</div></div>

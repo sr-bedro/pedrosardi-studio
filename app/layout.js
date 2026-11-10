@@ -1,5 +1,6 @@
 import Script from 'next/script'
 import './globals.css'
+import { SITE_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from './lib/site'
 
 export const metadata = {
   title: 'Pedro Sardi · Visualización Arquitectónica',
@@ -9,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: 'Pedro Sardi · Visualización Arquitectónica',
     description: 'Renders fotorrealistas y tutorías D5 Render. Basado en Paraguay.',
-    url: 'https://pedrosardi.studio',
+    url: SITE_URL,
     siteName: 'Pedro Sardi Studio',
     locale: 'es_PY',
     type: 'website',
@@ -21,8 +22,8 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Pedro Sardi',
-  url: 'https://pedrosardi.studio',
-  image: 'https://pedrosardi.studio/assets/about.webp',
+  url: SITE_URL,
+  image: `${SITE_URL}/assets/about.webp`,
   jobTitle: 'Visualizador Arquitectónico y Tutor Verificado D5 Render',
   description: 'Visualizador arquitectónico y tutor verificado de D5 Render con base en Paraguay. Instructor en IMUTES. Co-fundador de OVETA.',
   nationality: 'PY',
@@ -34,14 +35,14 @@ const personSchema = {
   },
   knowsAbout: ['D5 Render', 'SketchUp', 'Visualización Arquitectónica', 'Renders 3D', 'V-Ray', 'Corona Renderer', '3ds Max'],
   sameAs: [
-    'https://www.linkedin.com/in/pedroesardi/',
-    'https://www.instagram.com/pedrosardi.studio/',
-    'https://www.youtube.com/@pedrosardi.studio',
+    LINKEDIN_URL,
+    INSTAGRAM_URL,
+    YOUTUBE_URL,
   ],
   worksFor: {
     '@type': 'Organization',
     name: 'OVETA',
-    url: 'https://oveta.studio',
+    url: OVETA_URL,
   },
 }
 
@@ -49,7 +50,7 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Pedro Sardi Studio',
-  url: 'https://pedrosardi.studio',
+  url: SITE_URL,
   description: 'Portfolio y servicios de Pedro Sardi — Visualizador arquitectónico y tutor verificado D5 Render en Paraguay.',
   author: { '@type': 'Person', name: 'Pedro Sardi' },
   inLanguage: 'es',

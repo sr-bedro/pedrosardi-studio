@@ -1,4 +1,5 @@
 import CursoClient from '../components/CursoClient'
+import { IMUTES_ORIGIN, IMUTES_CURSO, SITE_URL } from '../lib/site'
 
 export const metadata = {
   title: 'Masterclass D5 Render · Pedro Sardi — Tutor Verificado',
@@ -7,7 +8,7 @@ export const metadata = {
   openGraph: {
     title: 'Masterclass D5 Render · Pedro Sardi — Tutor Verificado',
     description: 'Desde cero hasta el render final. +18 horas. Tutor verificado.',
-    url: 'https://pedrosardi.studio/curso-d5render',
+    url: `${SITE_URL}/curso-d5render`,
   },
 }
 
@@ -16,7 +17,7 @@ const courseSchema = {
   '@type': 'Course',
   name: 'Masterclass D5 Render',
   description: 'Curso completo de D5 Render en español. Más de 18 horas de contenido estructurado desde cero hasta el render profesional final. Incluye módulos de interiores, exteriores y animaciones.',
-  url: 'https://pedrosardi.studio/curso-d5render',
+  url: `${SITE_URL}/curso-d5render`,
   inLanguage: 'es',
   educationalLevel: 'Beginner to Intermediate',
   teaches: ['D5 Render', 'Renders arquitectónicos', 'Iluminación 3D', 'Materiales PBR', 'Animaciones arquitectónicas'],
@@ -24,18 +25,18 @@ const courseSchema = {
   provider: {
     '@type': 'Organization',
     name: 'IMUTES',
-    url: 'https://www.imutes.online',
+    url: IMUTES_ORIGIN,
   },
   instructor: {
     '@type': 'Person',
     name: 'Pedro Sardi',
-    url: 'https://pedrosardi.studio',
+    url: SITE_URL,
     jobTitle: 'Tutor Verificado D5 Render',
   },
   offers: {
     '@type': 'Offer',
     availability: 'https://schema.org/InStock',
-    url: 'https://www.imutes.online/cursos/renderiza-como-un-profesional-curso-completo-de-d5-render-para-sketchup',
+    url: IMUTES_CURSO,
   },
 }
 

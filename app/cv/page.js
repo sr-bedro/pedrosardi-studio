@@ -1,4 +1,5 @@
 import CvClient from '../components/CvClient'
+import { SITE_URL } from '../lib/site'
 
 export const metadata = {
   title: 'CV · Pedro Sardi — Visualizador Arquitectónico',
@@ -7,7 +8,7 @@ export const metadata = {
   openGraph: {
     title: 'CV · Pedro Sardi',
     description: 'Visualizador arquitectónico y tutor verificado D5 Render. Caacupé, Paraguay.',
-    url: 'https://pedrosardi.studio/cv',
+    url: `${SITE_URL}/cv`,
   },
 }
 

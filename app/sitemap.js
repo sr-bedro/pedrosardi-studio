@@ -1,19 +1,21 @@
+import { SITE_URL } from './lib/site'
+
 export default function sitemap() {
   return [
     {
-      url: 'https://pedrosardi.studio',
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://pedrosardi.studio/curso-d5render',
+      url: `${SITE_URL}/curso-d5render`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: 'https://pedrosardi.studio/cv',
+      url: `${SITE_URL}/cv`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
