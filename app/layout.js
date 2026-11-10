@@ -1,6 +1,30 @@
 import Script from 'next/script'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { SITE_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL, INSTRUCTOR_TITULO, INSTRUCTOR_IMUTES, enFrase } from './lib/site'
+
+// Fuentes autoalojadas por next/font: el navegador ya no pide nada a Google Fonts.
+// Solo se cargan los pesos y estilos que el sitio usa de verdad (los mismos que cargaba el <link> anterior):
+//   Playfair Display: 400 normal e italic  ·  DM Sans: 300, 400 y 500.
+// No se usa la fuente variable completa a propósito: el peso 600 de la Home (etiqueta "Nuevo" y botón "Adquirir")
+// se sigue renderizando igual que antes.
+// preload: false -> no se precargan en todas las rutas (p. ej. /cursos/d5-render-express usa Outfit y no las necesita);
+// el navegador las descarga solo en las páginas que las usan.
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  preload: false,
+})
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-sans',
+  preload: false,
+})
 
 export const metadata = {
   title: 'Pedro Sardi · Visualización Arquitectónica',
@@ -56,15 +80,8 @@ const websiteSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* display=swap → texto visible inmediatamente, mejora LCP */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
         <link rel="icon" type="image/png" href="/assets/favicon.png" />
         <script
           type="application/ld+json"
