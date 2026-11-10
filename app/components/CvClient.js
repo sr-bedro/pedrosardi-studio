@@ -229,16 +229,23 @@ const langs = [
 
 export default function CvClient() {
   useEffect(() => {
+    // Un solo AbortController: abort() en el cleanup quita TODOS los listeners.
+    var ac = new AbortController()
+    var opts = { signal: ac.signal }
+    var optsPassive = { signal: ac.signal, passive: true }
+    var rafId = 0
     var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
     if (hasMouse) {
       var dot = document.getElementById('c-dot'), ring = document.getElementById('c-ring')
       var mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my
-      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';},{passive:true})
-      ;(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})()
+      dot.style.left = mx+'px'; dot.style.top = my+'px'
+      ring.style.left = rx+'px'; ring.style.top = ry+'px'
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';},optsPassive)
+      ;(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';rafId=requestAnimationFrame(tick)})()
       document.querySelectorAll('a, button').forEach(function(el){
-        el.addEventListener('mouseenter',function(){document.body.classList.add('ch')})
-        el.addEventListener('mouseleave',function(){document.body.classList.remove('ch')})
+        el.addEventListener('mouseenter',function(){document.body.classList.add('ch')},opts)
+        el.addEventListener('mouseleave',function(){document.body.classList.remove('ch')},opts)
       })
     }
 
@@ -246,7 +253,7 @@ export default function CvClient() {
     window.addEventListener('scroll',function(){
       var docH = document.documentElement.scrollHeight - window.innerHeight
       prog.style.width = (docH>0?(window.scrollY/docH)*100:0) + '%'
-    },{passive:true})
+    },optsPassive)
 
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
@@ -258,6 +265,13 @@ export default function CvClient() {
       })
     },{threshold:0.08})
     document.querySelectorAll('.a, .a-l').forEach(function(el){obs.observe(el)})
+
+    return function() {
+      ac.abort()
+      cancelAnimationFrame(rafId)
+      obs.disconnect()
+      document.body.classList.remove('ch')
+    }
   },[])
 
   return (

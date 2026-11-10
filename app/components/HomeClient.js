@@ -389,20 +389,29 @@ const css = `
 
 export default function HomeClient() {
   useEffect(() => {
+    // Un solo AbortController: abort() en el cleanup quita TODOS los listeners.
+    var ac = new AbortController()
+    var opts = { signal: ac.signal }
+    var optsPassive = { signal: ac.signal, passive: true }
+    var timers = []
+    var rafIds = []
+    function later(fn, ms) { var id = setTimeout(fn, ms); timers.push(id); return id }
+    function frame(fn) { var id = requestAnimationFrame(fn); rafIds.push(id); return id }
+
     // ── iOS SAFARI VH FIX
     function setVh() {
       var vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', vh + 'px')
     }
     setVh()
-    window.addEventListener('orientationchange', function() { setTimeout(setVh, 300) })
+    window.addEventListener('orientationchange', function() { later(setVh, 300) }, opts)
 
-    var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    var mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+    var hasMouse = mq.matches
 
-    window.matchMedia('(hover: hover) and (pointer: fine)').addEventListener('change', function() {
-      location.reload() })
-      
     // ── MOBILE VIDEO SWAP
+    // Los slides 2 y 3 conservan su video de escritorio como fallback
+    // (no existen Hero-2-mobile.mp4 ni Hero-3-mobile.mp4).
     if (!hasMouse) {
       // Poster mobile
       var v0 = document.getElementById('hero-vid-0')
@@ -412,23 +421,33 @@ export default function HomeClient() {
       }
       var heroVid0 = document.getElementById('hero-vid-0')
       if (heroVid0) { var mSrc0 = heroVid0.querySelector('source'); if (mSrc0) { mSrc0.src = '/assets/hero-mobile.mp4'; heroVid0.load(); heroVid0.play().catch(function(){}) } }
-      var heroVid1 = document.getElementById('hero-vid-1')
-      if (heroVid1) { var mSrc1 = heroVid1.querySelector('source'); if (mSrc1) { mSrc1.src = '/assets/Hero-2-mobile.mp4'; heroVid1.load() } }
-      var heroVid2 = document.getElementById('hero-vid-2')
-      if (heroVid2) { var mSrc2 = heroVid2.querySelector('source'); if (mSrc2) { mSrc2.src = '/assets/Hero-3-mobile.mp4'; heroVid2.load() } }
     }
 
-    // ── CURSOR
-    if (hasMouse) {
-      var dot = document.getElementById('c-dot'), ring = document.getElementById('c-ring')
-      var mx=0,my=0,rx=0,ry=0
-      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';},{passive:true})
-      ;(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})()
-      document.querySelectorAll('a,button,[role="button"]').forEach(function(el){
-        el.addEventListener('mouseenter',function(){document.body.classList.add('ch')})
-        el.addEventListener('mouseleave',function(){document.body.classList.remove('ch')})
+    // ── CURSOR (se enciende/apaga solo si cambia el tipo de puntero, sin recargar)
+    var dot = document.getElementById('c-dot'), ring = document.getElementById('c-ring')
+    var cursorAc = null, cursorRaf = 0
+    function startCursor() {
+      if (cursorAc || !dot || !ring) return
+      cursorAc = new AbortController()
+      var cOpts = { signal: cursorAc.signal }
+      var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px'
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px'
+      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px' }, { signal: cursorAc.signal, passive: true })
+      ;(function tick() { rx += (mx - rx) * .1; ry += (my - ry) * .1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; cursorRaf = requestAnimationFrame(tick) })()
+      document.querySelectorAll('a,button,[role="button"]').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { document.body.classList.add('ch') }, cOpts)
+        el.addEventListener('mouseleave', function() { document.body.classList.remove('ch') }, cOpts)
       })
     }
+    function stopCursor() {
+      if (!cursorAc) return
+      cursorAc.abort(); cursorAc = null
+      cancelAnimationFrame(cursorRaf)
+      document.body.classList.remove('ch')
+    }
+    if (hasMouse) startCursor()
+    mq.addEventListener('change', function(e) { if (e.matches) startCursor(); else stopCursor() }, opts)
 
     // ── NAV STICKY (always stuck)
     document.getElementById('nav').classList.add('stuck')
@@ -440,7 +459,7 @@ export default function HomeClient() {
         var isOpen=mobileMenu.classList.toggle('open')
         menuBtn.classList.toggle('open',isOpen)
         menuBtn.setAttribute('aria-expanded',isOpen)
-      })
+      }, opts)
     }
 
     // ── FULLPAGE SCROLL
@@ -461,7 +480,7 @@ export default function HomeClient() {
       fpWrap.style.transform = 'translateY(-' + (cur * 100) + 'vh)'
       fpWrap.style.transform = 'translateY(calc(' + cur + ' * calc(var(--vh, 1vh) * -100)))'
       fpDots.forEach(function(d,i){ d.classList.toggle('on', i===cur) })
-      setTimeout(function(){
+      later(function(){
         fpSecs[cur].classList.add('visible')
         var rg = fpSecs[cur].querySelector('.rg')
         if (rg) { rg.scrollTop = rgPos === 'bottom' ? rg.scrollHeight : 0 }
@@ -502,22 +521,22 @@ export default function HomeClient() {
       var workIdx = fpSecs.findIndex(function(s){ return s.id==='work' })
       var rgPos2 = (cur+dir2===workIdx) ? (dir2>0?'top':'bottom') : null
       goSec(cur+dir2, rgPos2)
-    }, { passive: false })
+    }, { signal: ac.signal, passive: false })
 
     // keyboard
     document.addEventListener('keydown',function(e){
       if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return
       if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();goSec(cur+1)}
       if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();goSec(cur-1)}
-    })
+    }, opts)
 
     // dots
-    fpDots.forEach(function(d){ d.addEventListener('click',function(){ goSec(parseInt(d.getAttribute('data-i'))) }) })
+    fpDots.forEach(function(d){ d.addEventListener('click',function(){ goSec(parseInt(d.getAttribute('data-i'))) }, opts) })
 
     // touch swipe
     var ty=0, txStart=0, tMoving=false
-    document.addEventListener('touchstart',function(e){ ty=e.touches[0].clientY; txStart=e.touches[0].clientX; tMoving=false },{passive:true})
-    document.addEventListener('touchmove',function(){ tMoving=true },{passive:true})
+    document.addEventListener('touchstart',function(e){ ty=e.touches[0].clientY; txStart=e.touches[0].clientX; tMoving=false },optsPassive)
+    document.addEventListener('touchmove',function(){ tMoving=true },optsPassive)
     document.addEventListener('touchend',function(e){
       if(!tMoving) return
       var rg=document.querySelector('.rg')
@@ -536,7 +555,7 @@ export default function HomeClient() {
       var workIdx2=fpSecs.findIndex(function(s){return s.id==='work'})
       var rgPos3=(cur+swipeDir===workIdx2)?(swipeDir>0?'top':'bottom'):null
       goSec(cur+swipeDir, rgPos3)
-    },{passive:true})
+    },optsPassive)
 
     // anchor links
     document.querySelectorAll('a[href^="#"]').forEach(function(a){
@@ -544,7 +563,7 @@ export default function HomeClient() {
         var id=a.getAttribute('href').slice(1)
         var idx=fpSecs.findIndex(function(s){return s.id===id})
         if(idx>=0){e.preventDefault();goSec(idx)}
-      })
+      }, opts)
     })
 
     // mobile menu anchor links — close menu on click
@@ -554,7 +573,7 @@ export default function HomeClient() {
           mobileMenu.classList.remove('open')
           menuBtn.classList.remove('open')
           menuBtn.setAttribute('aria-expanded','false')
-        })
+        }, opts)
       })
     }
 
@@ -565,7 +584,7 @@ export default function HomeClient() {
     if (hasMouse) {
       function startFill(i){
         bars.forEach(function(b){var f=b.querySelector('.hbar-fill');f.style.transition='none';f.style.width='0%'})
-        requestAnimationFrame(function(){requestAnimationFrame(function(){
+        frame(function(){frame(function(){
           var f=bars[i].querySelector('.hbar-fill')
           f.style.transition='width '+INTERVAL+'ms linear';f.style.width='100%'
         })})
@@ -575,7 +594,7 @@ export default function HomeClient() {
         if(next===vidCur) return
         slides[vidCur].classList.remove('on');bars[vidCur].classList.remove('on')
         var oldV=slides[vidCur].querySelector('video')
-        if(oldV){oldV.pause();(function(v){setTimeout(function(){v.currentTime=0},1500)})(oldV)}
+        if(oldV){oldV.pause();(function(v){later(function(){v.currentTime=0},1500)})(oldV)}
         vidCur=next
         slides[vidCur].classList.add('on');bars[vidCur].classList.add('on')
         var newV=slides[vidCur].querySelector('video');if(newV) newV.play().catch(function(){})
@@ -584,14 +603,22 @@ export default function HomeClient() {
       }
       startFill(0)
       vidTimer=setInterval(function(){goVid(vidCur+1)},INTERVAL)
-      bars.forEach(function(b,i){b.addEventListener('click',function(){goVid(i)})})
+      bars.forEach(function(b,i){b.addEventListener('click',function(){goVid(i)}, opts)})
       var hx=0, heroEl=document.getElementById('hero')
       if(heroEl){
-        heroEl.addEventListener('touchstart',function(e){hx=e.touches[0].clientX},{passive:true})
-        heroEl.addEventListener('touchend',function(e){var diff=hx-e.changedTouches[0].clientX;if(Math.abs(diff)>50) goVid(vidCur+(diff>0?1:-1))},{passive:true})
+        heroEl.addEventListener('touchstart',function(e){hx=e.touches[0].clientX},optsPassive)
+        heroEl.addEventListener('touchend',function(e){var diff=hx-e.changedTouches[0].clientX;if(Math.abs(diff)>50) goVid(vidCur+(diff>0?1:-1))},optsPassive)
       }
-}
-    return () => { clearInterval(vidTimer) } 
+    }
+
+    return function() {
+      ac.abort()
+      clearInterval(vidTimer)
+      timers.forEach(clearTimeout)
+      rafIds.forEach(cancelAnimationFrame)
+      stopCursor()
+      document.body.classList.remove('ch')
+    }
   }, [])
 
   return (

@@ -252,17 +252,24 @@ const css = `
 
 export default function CursoClient() {
   useEffect(() => {
+    // Un solo AbortController: abort() en el cleanup quita TODOS los listeners.
+    var ac = new AbortController()
+    var opts = { signal: ac.signal }
+    var optsPassive = { signal: ac.signal, passive: true }
+    var rafId = 0
     var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
     // CURSOR
     if (hasMouse) {
       var dot = document.getElementById('c-dot'), ring = document.getElementById('c-ring')
-      var mx=0,my=0,rx=0,ry=0
-      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';},{passive:true})
-      ;(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})()
+      var mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my
+      dot.style.left = mx+'px'; dot.style.top = my+'px'
+      ring.style.left = rx+'px'; ring.style.top = ry+'px'
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';},optsPassive)
+      ;(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';rafId=requestAnimationFrame(tick)})()
       document.querySelectorAll('a, button').forEach(function(el){
-        el.addEventListener('mouseenter',function(){document.body.classList.add('ch')})
-        el.addEventListener('mouseleave',function(){document.body.classList.remove('ch')})
+        el.addEventListener('mouseenter',function(){document.body.classList.add('ch')},opts)
+        el.addEventListener('mouseleave',function(){document.body.classList.remove('ch')},opts)
       })
     }
 
@@ -273,7 +280,7 @@ export default function CursoClient() {
       nav.classList.toggle('stuck', window.scrollY > 40)
       var docH = document.documentElement.scrollHeight - window.innerHeight
       progressBar.style.width = (docH > 0 ? (window.scrollY/docH)*100 : 0) + '%'
-    }, { passive: true })
+    }, optsPassive)
 
     // SCROLL REVEAL
     var rvObs = new IntersectionObserver(function(entries) {
@@ -288,7 +295,7 @@ export default function CursoClient() {
     if (heroBg) {
       window.addEventListener('scroll', function() {
         heroBg.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px)'
-      }, { passive: true })
+      }, optsPassive)
     }
 
     // MODAL VIDEO
@@ -302,12 +309,21 @@ export default function CursoClient() {
         iframe.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0'
         modal.classList.add('open')
         document.body.style.overflow = 'hidden'
-      })
+      }, opts)
     })
     function closeModal() { modal.classList.remove('open'); iframe.src = ''; document.body.style.overflow = '' }
-    btnClose.addEventListener('click', closeModal)
-    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal() })
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal() })
+    btnClose.addEventListener('click', closeModal, opts)
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal() }, opts)
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal() }, opts)
+
+    return function() {
+      ac.abort()
+      cancelAnimationFrame(rafId)
+      rvObs.disconnect()
+      document.body.classList.remove('ch')
+      // Si se desmonta con el modal abierto, no dejar el scroll bloqueado
+      if (modal.classList.contains('open')) closeModal()
+    }
   }, [])
 
   return (
