@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { IMUTES_CURSO, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, capitalizar, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
 
 const css = `
   /* ─── RESET ─── */
@@ -708,7 +708,7 @@ export default function HomeClient() {
                 <div>
                   <p className="mc-banner-title">Masterclass <em>D5 Render</em> disponible</p>
                   <p className="mc-banner-sub">
-                    <span>+18 horas de contenido</span>
+                    <span>{CURSO_IMUTES.duracion} de clases</span>
                     <span>En español</span>
                     <span>Tutor verificado</span>
                     <span>IMUTES</span>
@@ -780,7 +780,7 @@ export default function HomeClient() {
           <div className="sv-grid">
             <div className="sv-card sec-in d1"><div className="sv-card-img"><img src="/assets/renders/render-1.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">01</span><div><h3 className="sv-title">Renders<br /><em>Arquitectónicos</em></h3><p className="sv-desc">Imágenes fotorrealistas de proyectos residenciales, comerciales y de hospitalidad. Desde el archivo SKP hasta la imagen final lista para presentar a inversores y clientes.</p></div><div className="sv-tags"><span className="sv-tag">D5 Render</span><span className="sv-tag">SketchUp</span><span className="sv-tag">Exterior</span><span className="sv-tag">Interior</span></div></div>
             <div className="sv-card sec-in d2"><div className="sv-card-img"><img src="/assets/renders/render-4.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">02</span><div><h3 className="sv-title">Tutorías<br /><em>D5 Render</em></h3><p className="sv-desc">Clases personalizadas 1 a 1 para arquitectos y diseñadores. Tutor verificado. En español, adaptadas a tu proyecto real.</p></div><div className="sv-tags"><span className="sv-tag">1 a 1</span><span className="sv-tag">Online</span><span className="sv-tag">Verificado</span><span className="sv-tag">Español</span></div></div>
-            <div className="sv-card sec-in d3"><div className="sv-card-img"><img src="/assets/renders/render-2.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">03</span><div><h3 className="sv-title">Masterclass<br /><em>Completa</em></h3><p className="sv-desc">Curso completo de D5 Render en formato grabado. Más de 18 horas de contenido estructurado. Disponible en IMUTES con dos años de acceso.</p></div><div className="sv-tags"><span className="sv-tag">18+ horas</span><span className="sv-tag">IMUTES</span></div></div>
+            <div className="sv-card sec-in d3"><div className="sv-card-img"><img src="/assets/renders/render-2.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">03</span><div><h3 className="sv-title">Masterclass<br /><em>Completa</em></h3><p className="sv-desc">Curso completo de D5 Render en formato grabado. {capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso, con archivos de SketchUp para practicar. Disponible en IMUTES con {CURSO_IMUTES.acceso} de acceso.</p></div><div className="sv-tags"><span className="sv-tag">{CURSO_IMUTES.duracion}</span><span className="sv-tag">IMUTES</span></div></div>
             <div className="sv-card sec-in d4"><div className="sv-card-img"><img src="/assets/renders/render-6.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">04</span><div><h3 className="sv-title">Tutoriales<br /><em>YouTube</em></h3><p className="sv-desc">Tips cortos y concretos sobre D5 Render. Sin relleno, directo al flujo de trabajo real. Canal @pedrosardi.studio.</p></div><div className="sv-tags"><span className="sv-tag">Gratis</span><span className="sv-tag">Español</span><span className="sv-tag">@pedrosardi.studio</span></div></div>
           </div>
         </section>
@@ -863,7 +863,7 @@ export default function HomeClient() {
             <div className="creds-list">
               <div className="cred">D5 Render — Tutor Verificado</div>
               <div className="cred">IMUTES — Instructor</div>
-              <div className="cred">D5 Render Masterclass — 18+ horas</div>
+              <div className="cred">D5 Render Masterclass — {CURSO_IMUTES.duracion}</div>
             </div>
           </div>
         </section>

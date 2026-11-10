@@ -1,7 +1,12 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { IMUTES_CURSO } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, capitalizar } from '../lib/site'
+
+// "5 h 39 min" -> ['5','h','39','min']: los números van grandes y las unidades en el <em> chico
+const duracionPartes = CURSO_IMUTES.duracion.split(' ')
+// "2 años" -> número grande + unidad en <em>
+const accesoPartes = CURSO_IMUTES.acceso.split(' ')
 
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -365,14 +370,14 @@ export default function CursoClient() {
         <div className="hero-content">
           <div className="hero-badge"><span>Tutor Verificado D5 Render · En español</span></div>
           <h1 className="hero-title">Masterclass<em>D5 Render</em></h1>
-          <p className="hero-sub">Desde cero hasta el render final. Más de 18 horas de contenido estructurado, con clases bonus que se siguen sumando.</p>
+          <p className="hero-sub">Desde cero hasta el render final. {capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso, con archivos de SketchUp para practicar y certificado digital de IMUTES.</p>
           <div className="hero-div"></div>
           <div className="cta-wrap">
             <a href={IMUTES_CURSO} target="_blank" rel="noopener" className="btn-primary">
               Adquirir en IMUTES
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </a>
-            <p className="cta-note">Disponible en <strong>IMUTES</strong> · Acceso por 2 años</p>
+            <p className="cta-note">Disponible en <strong>IMUTES</strong> · Acceso por {CURSO_IMUTES.acceso}</p>
           </div>
         </div>
         <div className="hero-preview">
@@ -388,10 +393,10 @@ export default function CursoClient() {
 
       {/* STATS */}
       <div id="stats">
-        <div className="stat a"><div className="stat-n">18<em>h+</em></div><div className="stat-l">Horas de contenido</div></div>
-        <div className="stat a d1"><div className="stat-n">6</div><div className="stat-l">Módulos + bonus</div></div>
+        <div className="stat a"><div className="stat-n">{duracionPartes.map(function(p,i){ return i%2 ? <em key={i}>{' '+p+(i<duracionPartes.length-1?' ':'')}</em> : p })}</div><div className="stat-l">Duración total</div></div>
+        <div className="stat a d1"><div className="stat-n">{CURSO_IMUTES.modulos}</div><div className="stat-l">Módulos</div></div>
         <div className="stat a d2"><div className="stat-n">100<em>%</em></div><div className="stat-l">En español</div></div>
-        <div className="stat a d3"><div className="stat-n">2<em>años</em></div><div className="stat-l">Acceso al curso</div></div>
+        <div className="stat a d3"><div className="stat-n">{accesoPartes[0]}<em>{accesoPartes[1]}</em></div><div className="stat-l">Acceso al curso</div></div>
       </div>
 
       {/* CERTIFICADO */}
@@ -441,16 +446,18 @@ export default function CursoClient() {
       <section id="modulos">
         <div className="mod-hd">
           <div><p className="lbl a">Temario completo</p><h2 className="disp a d1">Lo que<br /><em>vas a aprender.</em></h2></div>
-          <p className="bt a d2" style={{maxWidth:'380px'}}>Un recorrido completo por D5 Render con proyectos reales. Las clases se van actualizando ⏳</p>
+          <p className="bt a d2" style={{maxWidth:'380px'}}>Un recorrido completo por D5 Render con proyectos reales, del primer render al recorrido animado.</p>
         </div>
         <div className="mod-list">
           {[
-            {n:'00', img:null, name:'Primeros', em:'Pasos', desc:'Instalación, interfaz y configuración inicial. Todo lo que necesitás para arrancar.', dur:'20 min'},
-            {n:'01', img:'/assets/mod-01.webp', name:'Primer', em:'Render', desc:'Tu primera imagen fotorrealista desde cero. Flujo de trabajo completo de inicio a fin.', dur:'38 min'},
-            {n:'02', img:'/assets/mod-02.webp', name:'Escena', em:'Interior', desc:'Iluminación artificial, materiales PBR, cámaras y composición.', dur:'1h 47 min'},
-            {n:'03', img:'/assets/mod-03.webp', name:'Escena Exterior', em:'Frontal', desc:'Entorno, vegetación, iluminación natural y cielo HDRI para renders exteriores de alto impacto.', dur:'1h 29 min'},
-            {n:'04', img:null, name:'Escena Exterior', em:'Trasera', desc:'Segunda perspectiva exterior: ángulos complementarios, distintas condiciones de luz y entorno ampliado.', dur:'40 min'},
-            {n:'05', img:null, name:'Animaciones', em:'y Cierre', desc:'Recorridos animados, exportación de video y presentación final profesional del proyecto.', dur:'1h'},
+            {n:'01', img:null, name:'Instalación y', em:'configuración inicial', desc:'Descarga e instalación de D5, archivos del curso, navegación, terreno y ambiente.', dur:'20 min'},
+            {n:'02', img:null, name:'Bonus exclusivo para alumnos:', em:'D5 Render PRO por 30 días', desc:'Cómo solicitar tu licencia de 30 días de D5 Render PRO, un beneficio exclusivo para alumnos.', dur:'1 min'},
+            {n:'03', img:'/assets/mod-01.webp', name:'Primer render', em:'exterior', desc:'Tu primera imagen fotorrealista exterior, desde cero y con el flujo de trabajo completo de inicio a fin.', dur:'39 min'},
+            {n:'04', img:'/assets/mod-02.webp', name:'Primer render', em:'interior', desc:'Iluminación artificial, materiales PBR, cámaras y composición.', dur:'1 h 48 min'},
+            {n:'05', img:'/assets/mod-03.webp', name:'Render exterior', em:'frontal', desc:'Entorno, vegetación, iluminación natural y cielo HDRI para renders exteriores de alto impacto.', dur:'1 h 29 min'},
+            {n:'06', img:null, name:'Render exterior posterior', em:'y recorrido', desc:'Segunda perspectiva exterior con ángulos complementarios y distintas condiciones de luz, y el recorrido por la escena.', dur:'42 min'},
+            {n:'07', img:null, name:'Animaciones', em:'', desc:'Recorridos animados, exportación de video y presentación final profesional del proyecto.', dur:'40 min'},
+            {n:'✓', img:null, name:'Certificación', em:'', desc:'Certificado digital emitido por IMUTES.', dur:null},
           ].map(function(m,i){return (
             <div className={'mod-item a' + (i>0?' d'+Math.min(i,4):'')} key={m.n}>
               <div className="mod-thumb">
@@ -464,7 +471,7 @@ export default function CursoClient() {
                 <p className="mod-desc">{m.desc}</p>
               </div>
               <div className="mod-meta">
-                <span className="mod-dur">{m.dur}</span>
+                {m.dur && <span className="mod-dur">{m.dur}</span>}
                 <span className="mod-status done">✓ Disponible</span>
               </div>
             </div>
@@ -472,7 +479,7 @@ export default function CursoClient() {
         </div>
         <div className="mod-total a">
           <span className="mod-total-label">Total del curso</span>
-          <div><div className="mod-total-val">6h+</div><div className="mod-total-note">y creciendo con clases bonus</div></div>
+          <div><div className="mod-total-val">{CURSO_IMUTES.duracion}</div><div className="mod-total-note">{CURSO_IMUTES.modulos} módulos · certificado digital de IMUTES</div></div>
         </div>
       </section>
 
@@ -509,7 +516,7 @@ export default function CursoClient() {
       {/* CTA FINAL */}
       <section id="cta-final">
         <h2 className="cta-title a">Empezá<br />a rendir<br /><em>diferente.</em></h2>
-        <p className="cta-sub a d1">Más de 18 horas de masterclass con clases bonus que se siguen sumando. Dos años de acceso en IMUTES.</p>
+        <p className="cta-sub a d1">{capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso, con archivos para practicar y certificado digital de IMUTES. {CURSO_IMUTES.acceso} de acceso.</p>
         <div className="cta-actions a d2">
           <a href={IMUTES_CURSO} target="_blank" rel="noopener" className="btn-primary">
             Adquirir en IMUTES

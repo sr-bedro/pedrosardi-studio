@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { IMUTES_CURSO, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
 
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,7 +78,7 @@ const css = `
   .hero-photo-wrap:hover::before { inset:-16px; border-color:rgba(185,148,96,.38); }
   .hero-photo-wrap img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center top; filter:grayscale(10%) brightness(.88); display:block; transition:filter .6s; }
   .hero-photo-wrap:hover img { filter:grayscale(0) brightness(.96); }
-  .hero-stats { display:flex; gap:48px; justify-content:center; margin-bottom:44px; }
+  .hero-stats { display:flex; flex-wrap:wrap; gap:48px; justify-content:center; margin-bottom:44px; }
   .hs { text-align:center; }
   .hs-n { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:400; color:var(--gold); line-height:1; display:block; }
   .hs-l { font-size:.52rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
@@ -310,7 +310,7 @@ export default function CvClient() {
             <img src="/assets/about.webp" alt="Pedro Sardi" />
           </div>
           <div className="hero-stats">
-            <div className="hs"><span className="hs-n">18+</span><span className="hs-l">hrs de curso</span></div>
+            <div className="hs"><span className="hs-n">{CURSO_IMUTES.duracion}</span><span className="hs-l">duración del curso</span></div>
             <div className="hs"><span className="hs-n">4K</span><span className="hs-l">renders</span></div>
             <div className="hs"><span className="hs-n">360°</span><span className="hs-l">tours virtuales</span></div>
           </div>
@@ -359,7 +359,7 @@ export default function CvClient() {
               {
                 date:'2025',
                 title:'Tutor Verificado', em:'D5 Render',
-                desc:'Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción. Lanzamiento de la Masterclass en IMUTES con más de 18 horas de contenido.',
+                desc:`Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción. Lanzamiento de la Masterclass en IMUTES, con ${CURSO_IMUTES.duracionVenta} de clases.`,
                 tags:['D5 Render','Tutor Verificado','IMUTES','Masterclass']
               },
               {
@@ -435,7 +435,7 @@ export default function CvClient() {
           <div className="cred-list">
             {[
               {icon:'✓', title:'Tutor Verificado D5 Render', desc:'Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción.', badge:'Verificado'},
-              {icon:'✦', title:'Instructor — IMUTES', desc:'Plataforma de cursos con estudiantes en Paraguay y toda la región hispanohablante. Masterclass D5 Render de 18+ horas.', badge:'18+ hrs'},
+              {icon:'✦', title:'Instructor — IMUTES', desc:`Plataforma de cursos con estudiantes en Paraguay y toda la región hispanohablante. Masterclass D5 Render de ${CURSO_IMUTES.duracionVenta}.`, badge:CURSO_IMUTES.duracion},
               {icon:'◈', title:'OVETA — Fundador', desc:'Fundado junto a Cristina Vargas. Estudio de visualización y construcción.', badge:'Co-fundador'},
               {icon:'▲', title:'Técnico en Electrónica — 2014', desc:'Domótica, conexiones eléctricas básicas, programación y automatización de sistemas.', badge:'Egresado 2014'},
             ].map(function(c,i){return (
@@ -488,7 +488,7 @@ export default function CvClient() {
                 {label:'LinkedIn', sub:'pedroesardi', href:LINKEDIN_URL},
                 {label:'Instagram', sub:'@pedrosardi.studio', href:INSTAGRAM_URL},
                 {label:'YouTube', sub:'@pedrosardi.studio', href:YOUTUBE_URL},
-                {label:'IMUTES', sub:'Masterclass D5 Render — 18+ horas', href:IMUTES_CURSO},
+                {label:'IMUTES', sub:`Masterclass D5 Render — ${CURSO_IMUTES.duracion}`, href:IMUTES_CURSO},
                 {label:'OVETA', sub:'oveta.studio', href:OVETA_URL},
               ].map(function(l){return (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener" className="cl-item">
