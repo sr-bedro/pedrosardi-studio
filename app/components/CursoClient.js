@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { IMUTES_CURSO, CURSO_IMUTES, capitalizar } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, capitalizar, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, INSTRUCTOR_IMUTES, enFrase } from '../lib/site'
 
 // "5 h 39 min" -> ['5','h','39','min']: los números van grandes y las unidades en el <em> chico
 const duracionPartes = CURSO_IMUTES.duracion.split(' ')
@@ -368,8 +368,8 @@ export default function CursoClient() {
         <div id="hero-bg-ov" aria-hidden="true"></div>
         <div id="hero-grid" aria-hidden="true"></div>
         <div className="hero-content">
-          <div className="hero-badge"><span>Tutor Verificado D5 Render · En español</span></div>
-          <h1 className="hero-title">Masterclass<em>D5 Render</em></h1>
+          <div className="hero-badge"><span>{INSTRUCTOR_TITULO_CORTO} · En español</span></div>
+          <h1 className="hero-title">Masterclass{' '}<em>D5 Render</em></h1>
           <p className="hero-sub">Desde cero hasta el render final. {capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso, con archivos de SketchUp para practicar y certificado digital de IMUTES.</p>
           <div className="hero-div"></div>
           <div className="cta-wrap">
@@ -406,7 +406,7 @@ export default function CursoClient() {
             <span className="cert-eyebrow">Certificado oficial</span>
             <div className="cert-frame">
               <div className="cert-img-box">
-                <img src="/assets/certificado-d5.webp" alt="Certificado Tutor Verificado D5 Render — Pedro Sardi" loading="lazy" />
+                <img src="/assets/certificado-d5.webp" alt={`Certificado de D5 Inc. que acredita a Pedro Sardi como ${enFrase(INSTRUCTOR_TITULO)}`} loading="lazy" />
                 <div className="cert-seal" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
                 </div>
@@ -414,12 +414,12 @@ export default function CursoClient() {
             </div>
             <div className="cert-verified-badge">
               <div className="cert-verified-dot"></div>
-              <span>Tutor Verificado D5 Render</span>
+              <span>{INSTRUCTOR_TITULO_CORTO}</span>
             </div>
           </div>
           <div className="cert-creds">
-            <div className="cert-cred-item a d1"><div className="cert-cred-icon">✓</div><div className="cert-cred-text"><h4>Tutor Verificado D5 Render</h4><p>Una de las pocas personas en Latinoamérica con esta certificación oficial directa de D5 Render.</p></div></div>
-            <div className="cert-cred-item a d2"><div className="cert-cred-icon">✦</div><div className="cert-cred-text"><h4>Instructor en IMUTES</h4><p>Plataforma de cursos con miles de estudiantes en Paraguay y toda la región hispanohablante.</p></div></div>
+            <div className="cert-cred-item a d1"><div className="cert-cred-icon">✓</div><div className="cert-cred-text"><h4>{INSTRUCTOR_TITULO}</h4><p>Una de las pocas personas en Latinoamérica con esta certificación oficial directa de D5 Render.</p></div></div>
+            <div className="cert-cred-item a d2"><div className="cert-cred-icon">✦</div><div className="cert-cred-text"><h4>{INSTRUCTOR_IMUTES}</h4><p>Plataforma de cursos con miles de estudiantes en Paraguay y toda la región hispanohablante.</p></div></div>
             <div className="cert-cred-item a d3"><div className="cert-cred-icon">▶</div><div className="cert-cred-text"><h4>Canal @pedrosardi.studio en YouTube</h4><p>Tutoriales cortos y concretos sobre D5 Render en español, sin relleno.</p></div></div>
           </div>
         </div>
@@ -431,13 +431,13 @@ export default function CursoClient() {
           <div className="about-img-circle">
             <img src="/assets/about.webp" alt="Pedro Sardi — Instructor" loading="lazy" />
           </div>
-          <div className="about-verified"><div className="av-dot"></div><span>Tutor Verificado D5 Render</span></div>
+          <div className="about-verified"><div className="av-dot"></div><span>{INSTRUCTOR_TITULO_CORTO}</span></div>
         </div>
         <div className="about-body">
           <p className="lbl a">El instructor</p>
           <h2 className="disp a d1" style={{fontSize:'clamp(2rem,3.5vw,3rem)',marginBottom:'24px'}}>Pedro <em>Sardi</em></h2>
-          <p className="bt a d2" style={{marginBottom:'16px'}}>Soy <strong>visualizador arquitectónico y tutor verificado de D5 Render</strong>, con base en Paraguay. Trabajo con estudios de toda Latinoamérica transformando modelos en imágenes fotorrealistas.</p>
-          <p className="bt a d3" style={{marginBottom:'16px'}}>Como <strong>Instructor en IMUTES</strong>, diseñé esta masterclass para que cualquier arquitecto o diseñador pueda dominar D5 Render con un flujo de trabajo claro y profesional.</p>
+          <p className="bt a d2" style={{marginBottom:'16px'}}>Soy <strong>visualizador arquitectónico e {enFrase(INSTRUCTOR_TITULO)}</strong>, con base en Paraguay. Trabajo con estudios de toda Latinoamérica transformando modelos en imágenes fotorrealistas.</p>
+          <p className="bt a d3" style={{marginBottom:'16px'}}>Como <strong>{INSTRUCTOR_IMUTES}</strong>, diseñé esta masterclass para que cualquier arquitecto o diseñador pueda dominar D5 Render con un flujo de trabajo claro y profesional.</p>
           <p className="bt a d4">Sin teoría innecesaria. Solo lo que realmente usás en proyectos reales.</p>
         </div>
       </section>
@@ -492,7 +492,7 @@ export default function CursoClient() {
         <div className="prev-grid">
           <div className="prev-card a d1" data-yt="u8fzui1hCwE">
             <div className="prev-thumb"><img src="https://img.youtube.com/vi/u8fzui1hCwE/maxresdefault.jpg" alt="Vista previa 1" loading="lazy" /><div className="prev-play"><div className="prev-pbtn"><svg viewBox="0 0 16 16"><polygon points="3,2 14,8 3,14"/></svg></div></div><span className="prev-badge">Vista previa</span></div>
-            <div className="prev-body"><p className="prev-meta">D5 Render · Fragmento</p><h3 className="prev-title">Imagen a 3D</h3><p className="prev-desc">Como usar la herramienta de creación de modelo 3D.</p></div>
+            <div className="prev-body"><p className="prev-meta">D5 Render · Fragmento</p><h3 className="prev-title">Imagen a 3D</h3><p className="prev-desc">Cómo usar la herramienta de creación de modelo 3D.</p></div>
           </div>
           <div className="prev-card a d2" data-yt="8oe03kbtUXg">
             <div className="prev-thumb"><img src="https://img.youtube.com/vi/8oe03kbtUXg/maxresdefault.jpg" alt="Vista previa 2" loading="lazy" /><div className="prev-play"><div className="prev-pbtn"><svg viewBox="0 0 16 16"><polygon points="3,2 14,8 3,14"/></svg></div></div><span className="prev-badge">Vista previa</span></div>
@@ -529,7 +529,7 @@ export default function CursoClient() {
       {/* FOOTER */}
       <footer id="footer">
         <span className="fl">Pedro Sardi</span>
-        <p>© 2025 pedrosardi.studio · Paraguay</p>
+        <p>© pedrosardi.studio</p>
         <Link href="/" className="footer-link">← Volver al sitio</Link>
       </footer>
     </>

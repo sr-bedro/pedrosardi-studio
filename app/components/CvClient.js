@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { IMUTES_CURSO, CURSO_IMUTES, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, INSTRUCTOR_IMUTES, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
 
 const css = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -197,7 +197,7 @@ const stack = [
       {name:'D5 Render', pct:98},
       {name:'SketchUp', pct:96},
       {name:'V-Ray', pct:82},
-      {name:'Corona Render', pct:72},
+      {name:'Corona Renderer', pct:72},
       {name:'3ds Max', pct:70},
       {name:'Blender', pct:55},
       {name:'Unreal Engine', pct:40},
@@ -300,10 +300,10 @@ export default function CvClient() {
         <div className="hero-inner">
           <div className="hero-tag">Disponible para proyectos</div>
           <h1 className="hero-name">
-            Pedro<em>Sardi.</em>
+            Pedro{' '}<em>Sardi.</em>
           </h1>
           <p className="hero-role">
-            Visualizador arquitectónico &amp; Tutor verificado D5 Render<br />
+            Visualizador arquitectónico &amp; {INSTRUCTOR_TITULO}<br />
             Paraguay · Trabajo con toda Latinoamérica
           </p>
           <div className="hero-photo-wrap">
@@ -358,9 +358,9 @@ export default function CvClient() {
             {[
               {
                 date:'2025',
-                title:'Tutor Verificado', em:'D5 Render',
+                title:INSTRUCTOR_TITULO_CORTO, em:'de D5 Render',
                 desc:`Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción. Lanzamiento de la Masterclass en IMUTES, con ${CURSO_IMUTES.duracionVenta} de clases.`,
-                tags:['D5 Render','Tutor Verificado','IMUTES','Masterclass']
+                tags:['D5 Render',INSTRUCTOR_TITULO_CORTO,'IMUTES','Masterclass']
               },
               {
                 date:'2024',
@@ -434,9 +434,9 @@ export default function CvClient() {
           <div className="a"><div className="lbl">Credenciales</div><h2 className="sec-title">Formación y <em>certificaciones.</em></h2></div>
           <div className="cred-list">
             {[
-              {icon:'✓', title:'Tutor Verificado D5 Render', desc:'Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción.', badge:'Verificado'},
-              {icon:'✦', title:'Instructor — IMUTES', desc:`Plataforma de cursos con estudiantes en Paraguay y toda la región hispanohablante. Masterclass D5 Render de ${CURSO_IMUTES.duracionVenta}.`, badge:CURSO_IMUTES.duracion},
-              {icon:'◈', title:'OVETA — Fundador', desc:'Fundado junto a Cristina Vargas. Estudio de visualización y construcción.', badge:'Co-fundador'},
+              {icon:'✓', title:INSTRUCTOR_TITULO, desc:'Certificación oficial directa de D5 Render. Una de las pocas personas en Latinoamérica con esta distinción.', badge:'Certificado'},
+              {icon:'✦', title:INSTRUCTOR_IMUTES, desc:`Plataforma de cursos con estudiantes en Paraguay y toda la región hispanohablante. Masterclass D5 Render de ${CURSO_IMUTES.duracionVenta}.`, badge:CURSO_IMUTES.duracion},
+              {icon:'◈', title:'OVETA — Cofundador', desc:'Fundado junto a Cristina Vargas. Estudio de visualización y construcción.', badge:'Cofundador'},
               {icon:'▲', title:'Técnico en Electrónica — 2014', desc:'Domótica, conexiones eléctricas básicas, programación y automatización de sistemas.', badge:'Egresado 2014'},
             ].map(function(c,i){return (
               <div className={'cred-item a' + (i>0?' d'+Math.min(i,4):'')} key={c.title}>
@@ -504,7 +504,7 @@ export default function CvClient() {
       {/* FOOTER */}
       <footer className="cv-footer">
         <span className="cv-footer-logo">Pedro Sardi</span>
-        <p>© 2025 pedrosardi.studio</p>
+        <p>© pedrosardi.studio</p>
         <Link href="/" style={{fontSize:'.58rem',letterSpacing:'.14em',textTransform:'uppercase',color:'rgba(237,233,225,.3)',borderBottom:'1px solid rgba(237,233,225,.1)',paddingBottom:'2px'}}>← Volver al inicio</Link>
       </footer>
     </>

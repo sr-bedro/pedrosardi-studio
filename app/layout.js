@@ -1,11 +1,11 @@
 import Script from 'next/script'
 import './globals.css'
-import { SITE_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from './lib/site'
+import { SITE_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL, INSTRUCTOR_TITULO, INSTRUCTOR_IMUTES, enFrase } from './lib/site'
 
 export const metadata = {
   title: 'Pedro Sardi · Visualización Arquitectónica',
-  description: 'Pedro Sardi — Visualizador arquitectónico y tutor verificado de D5 Render. Caacupé, Paraguay.',
-  keywords: 'renders arquitectónicos paraguay, visualizador arquitectónico paraguay, tutor d5 render, curso d5 render español',
+  description: `Pedro Sardi — Visualizador arquitectónico e ${enFrase(INSTRUCTOR_TITULO)}. Paraguay.`,
+  keywords: 'renders arquitectónicos paraguay, visualizador arquitectónico paraguay, tutor d5 render, instructor d5 render, instructor certificado d5 render, curso d5 render español',
   authors: [{ name: 'Pedro Sardi' }],
   openGraph: {
     title: 'Pedro Sardi · Visualización Arquitectónica',
@@ -24,14 +24,12 @@ const personSchema = {
   name: 'Pedro Sardi',
   url: SITE_URL,
   image: `${SITE_URL}/assets/about.webp`,
-  jobTitle: 'Visualizador Arquitectónico y Tutor Verificado D5 Render',
-  description: 'Visualizador arquitectónico y tutor verificado de D5 Render con base en Paraguay. Instructor en IMUTES. Co-fundador de OVETA.',
+  jobTitle: ['Visualizador arquitectónico', INSTRUCTOR_TITULO],
+  description: `Visualizador arquitectónico e ${enFrase(INSTRUCTOR_TITULO)} con base en Paraguay. ${INSTRUCTOR_IMUTES}. Cofundador de OVETA.`,
   nationality: 'PY',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'PY',
-    addressLocality: 'Caacupé',
-    addressRegion: 'Cordillera',
   },
   knowsAbout: ['D5 Render', 'SketchUp', 'Visualización Arquitectónica', 'Renders 3D', 'V-Ray', 'Corona Renderer', '3ds Max'],
   sameAs: [
@@ -51,7 +49,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   name: 'Pedro Sardi Studio',
   url: SITE_URL,
-  description: 'Portfolio y servicios de Pedro Sardi — Visualizador arquitectónico y tutor verificado D5 Render en Paraguay.',
+  description: `Portfolio y servicios de Pedro Sardi — Visualizador arquitectónico e ${enFrase(INSTRUCTOR_TITULO)} en Paraguay.`,
   author: { '@type': 'Person', name: 'Pedro Sardi' },
   inLanguage: 'es',
 }

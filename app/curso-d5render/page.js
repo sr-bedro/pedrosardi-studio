@@ -1,13 +1,13 @@
 import CursoClient from '../components/CursoClient'
-import { IMUTES_ORIGIN, IMUTES_CURSO, SITE_URL, CURSO_IMUTES, capitalizar } from '../lib/site'
+import { IMUTES_ORIGIN, IMUTES_CURSO, SITE_URL, CURSO_IMUTES, capitalizar, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, enFrase } from '../lib/site'
 
 export const metadata = {
-  title: 'Masterclass D5 Render · Pedro Sardi — Tutor Verificado',
-  description: `Curso completo de D5 Render en español. ${capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso por Pedro Sardi, tutor verificado. Desde cero hasta el render final profesional.`,
-  keywords: 'curso d5 render español, masterclass d5 render, tutor d5 render verificado, aprender d5 render, curso renders arquitectónicos paraguay',
+  title: `Masterclass D5 Render · Pedro Sardi — ${INSTRUCTOR_TITULO_CORTO}`,
+  description: `Curso completo de D5 Render en español. ${capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso por Pedro Sardi, ${enFrase(INSTRUCTOR_TITULO)}. Desde cero hasta el render final profesional.`,
+  keywords: 'curso d5 render español, masterclass d5 render, tutor d5 render, instructor d5 render, instructor certificado d5 render, aprender d5 render, curso renders arquitectónicos paraguay',
   openGraph: {
-    title: 'Masterclass D5 Render · Pedro Sardi — Tutor Verificado',
-    description: `Desde cero hasta el render final. ${capitalizar(CURSO_IMUTES.duracionVenta)} de clases. Tutor verificado.`,
+    title: `Masterclass D5 Render · Pedro Sardi — ${INSTRUCTOR_TITULO_CORTO}`,
+    description: `Desde cero hasta el render final. ${capitalizar(CURSO_IMUTES.duracionVenta)} de clases. ${INSTRUCTOR_TITULO_CORTO}.`,
     url: `${SITE_URL}/curso-d5render`,
   },
 }
@@ -31,7 +31,7 @@ const courseSchema = {
     '@type': 'Person',
     name: 'Pedro Sardi',
     url: SITE_URL,
-    jobTitle: 'Tutor Verificado D5 Render',
+    jobTitle: INSTRUCTOR_TITULO,
   },
   offers: {
     '@type': 'Offer',

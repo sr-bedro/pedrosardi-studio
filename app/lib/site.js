@@ -21,6 +21,15 @@ export const CURSO_IMUTES = {
 // Pone la primera letra en mayúscula (para usar duracionVenta al empezar una frase).
 export const capitalizar = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
+// ── Título del instructor (según el certificado "D5 Certified Instructor", emitido por D5 Inc. el 2026-07-08, vigencia 1 año)
+export const INSTRUCTOR_TITULO = 'Instructor certificado de D5 Render'
+export const INSTRUCTOR_TITULO_CORTO = 'Instructor certificado' // para chips y badges
+// Mi rol en la academia. Es otra cosa que el título de D5: se escribe siempre igual.
+export const INSTRUCTOR_IMUTES = 'Instructor en IMUTES'
+
+// Pone la primera letra en minúscula (para usar el título dentro de una frase).
+export const enFrase = (s) => s.charAt(0).toLowerCase() + s.slice(1)
+
 // ── Sitio y redes
 export const SITE_URL = 'https://pedrosardi.studio'
 export const WHATSAPP_URL = 'https://wa.me/595974534159'

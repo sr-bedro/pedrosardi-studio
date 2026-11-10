@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { IMUTES_CURSO, CURSO_IMUTES, capitalizar, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
+import { IMUTES_CURSO, CURSO_IMUTES, capitalizar, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, INSTRUCTOR_IMUTES, enFrase, WHATSAPP_URL, LINKEDIN_URL, INSTAGRAM_URL, YOUTUBE_URL, OVETA_URL } from '../lib/site'
 
 const css = `
   /* ─── RESET ─── */
@@ -710,7 +710,7 @@ export default function HomeClient() {
                   <p className="mc-banner-sub">
                     <span>{CURSO_IMUTES.duracion} de clases</span>
                     <span>En español</span>
-                    <span>Tutor verificado</span>
+                    <span>{INSTRUCTOR_TITULO_CORTO}</span>
                     <span>IMUTES</span>
                   </p>
                 </div>
@@ -739,7 +739,7 @@ export default function HomeClient() {
               </div>
               <div className="ab-body">
                 <p className="lbl sec-in d1">Sobre mí</p>
-                <p className="bt sec-in d2" style={{marginBottom:'14px'}}>Soy <strong>Pedro Sardi</strong>, visualizador arquitectónico y <strong>tutor verificado de D5 Render</strong> con base en Paraguay. Trabajo con estudios y arquitectos para transformar planos en imágenes fotorrealistas que comunican el espacio antes de que exista.</p>
+                <p className="bt sec-in d2" style={{marginBottom:'14px'}}>Soy <strong>Pedro Sardi</strong>, visualizador arquitectónico e <strong>{enFrase(INSTRUCTOR_TITULO)}</strong> con base en Paraguay. Trabajo con estudios y arquitectos para transformar planos en imágenes fotorrealistas que comunican el espacio antes de que exista.</p>
                 <p className="bt sec-in d3" style={{marginBottom:'28px'}}>Cada proyecto es una colaboración entre técnica y narrativa visual. No entrego renders — entrego el primer encuentro de tu cliente con su futuro espacio.</p>
                 <a href="#contact" className="alnk sec-in d4">Trabajemos juntos</a>
               </div>
@@ -779,7 +779,7 @@ export default function HomeClient() {
           </div>
           <div className="sv-grid">
             <div className="sv-card sec-in d1"><div className="sv-card-img"><img src="/assets/renders/render-1.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">01</span><div><h3 className="sv-title">Renders<br /><em>Arquitectónicos</em></h3><p className="sv-desc">Imágenes fotorrealistas de proyectos residenciales, comerciales y de hospitalidad. Desde el archivo SKP hasta la imagen final lista para presentar a inversores y clientes.</p></div><div className="sv-tags"><span className="sv-tag">D5 Render</span><span className="sv-tag">SketchUp</span><span className="sv-tag">Exterior</span><span className="sv-tag">Interior</span></div></div>
-            <div className="sv-card sec-in d2"><div className="sv-card-img"><img src="/assets/renders/render-4.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">02</span><div><h3 className="sv-title">Tutorías<br /><em>D5 Render</em></h3><p className="sv-desc">Clases personalizadas 1 a 1 para arquitectos y diseñadores. Tutor verificado. En español, adaptadas a tu proyecto real.</p></div><div className="sv-tags"><span className="sv-tag">1 a 1</span><span className="sv-tag">Online</span><span className="sv-tag">Verificado</span><span className="sv-tag">Español</span></div></div>
+            <div className="sv-card sec-in d2"><div className="sv-card-img"><img src="/assets/renders/render-4.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">02</span><div><h3 className="sv-title">Tutorías<br /><em>D5 Render</em></h3><p className="sv-desc">Clases personalizadas 1 a 1 para arquitectos y diseñadores. {INSTRUCTOR_TITULO_CORTO}. En español, adaptadas a tu proyecto real.</p></div><div className="sv-tags"><span className="sv-tag">1 a 1</span><span className="sv-tag">Online</span><span className="sv-tag">Certificado</span><span className="sv-tag">Español</span></div></div>
             <div className="sv-card sec-in d3"><div className="sv-card-img"><img src="/assets/renders/render-2.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">03</span><div><h3 className="sv-title">Masterclass<br /><em>Completa</em></h3><p className="sv-desc">Curso completo de D5 Render en formato grabado. {capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso, con archivos de SketchUp para practicar. Disponible en IMUTES con {CURSO_IMUTES.acceso} de acceso.</p></div><div className="sv-tags"><span className="sv-tag">{CURSO_IMUTES.duracion}</span><span className="sv-tag">IMUTES</span></div></div>
             <div className="sv-card sec-in d4"><div className="sv-card-img"><img src="/assets/renders/render-6.webp" alt="" aria-hidden="true" /></div><span className="sv-n" aria-hidden="true">04</span><div><h3 className="sv-title">Tutoriales<br /><em>YouTube</em></h3><p className="sv-desc">Tips cortos y concretos sobre D5 Render. Sin relleno, directo al flujo de trabajo real. Canal @pedrosardi.studio.</p></div><div className="sv-tags"><span className="sv-tag">Gratis</span><span className="sv-tag">Español</span><span className="sv-tag">@pedrosardi.studio</span></div></div>
           </div>
@@ -830,8 +830,8 @@ export default function HomeClient() {
               <div className="tut-body">
                 <div>
                   <p className="tut-meta">D5 Render · Iluminación</p>
-                  <h3 className="tut-title">Proyección de Video</h3>
-                  <p className="tut-text">Efecto de proyector de luz, dos formas de hacer.</p>
+                  <h3 className="tut-title">Proyección de video</h3>
+                  <p className="tut-text">Efecto de proyector de luz, dos formas de hacerlo.</p>
                 </div>
                 <span className="tut-arrow">Ver en YouTube</span>
               </div>
@@ -846,8 +846,8 @@ export default function HomeClient() {
               <div className="tut-body">
                 <div>
                   <p className="tut-meta">D5 Render · Herramientas</p>
-                  <h3 className="tut-title">Herramienta de Secciones</h3>
-                  <p className="tut-text">Como usar la herramienta de corte en D5 Render.</p>
+                  <h3 className="tut-title">Herramienta de secciones</h3>
+                  <p className="tut-text">Cómo usar la herramienta de corte en D5 Render.</p>
                 </div>
                 <span className="tut-arrow">Ver en YouTube</span>
               </div>
@@ -861,8 +861,8 @@ export default function HomeClient() {
           <div id="creds">
             <span className="creds-lbl">Credenciales</span>
             <div className="creds-list">
-              <div className="cred">D5 Render — Tutor Verificado</div>
-              <div className="cred">IMUTES — Instructor</div>
+              <div className="cred">D5 Render — {INSTRUCTOR_TITULO_CORTO}</div>
+              <div className="cred">{INSTRUCTOR_IMUTES}</div>
               <div className="cred">D5 Render Masterclass — {CURSO_IMUTES.duracion}</div>
             </div>
           </div>
@@ -894,7 +894,7 @@ export default function HomeClient() {
               Ver CV
             </a>
           </div>
-          <p id="footer-line" className="sec-in d3">© 2025 pedrosardi.studio · Caacupé, Paraguay</p>
+          <p id="footer-line" className="sec-in d3">© pedrosardi.studio</p>
         </section>
 
       </div>
