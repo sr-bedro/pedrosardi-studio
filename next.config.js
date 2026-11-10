@@ -3,7 +3,8 @@ const nextConfig = {
   devIndicators: false,
   compress: true,
 
-  // Cache de 1 año para assets estáticos
+  // Cache de 1 hora con revalidación para /assets: los archivos conservan su nombre
+  // al reemplazarse (ej. el certificado), así que un cache "immutable" de 1 año los dejaría desactualizados.
   async headers() {
     return [
       {
@@ -11,7 +12,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=3600, must-revalidate',
           },
         ],
       },

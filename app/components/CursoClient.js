@@ -406,7 +406,7 @@ export default function CursoClient() {
             <span className="cert-eyebrow">Certificado oficial</span>
             <div className="cert-frame">
               <div className="cert-img-box">
-                <img src="/assets/certificado-d5.webp" alt={`Certificado de D5 Inc. que acredita a Pedro Sardi como ${enFrase(INSTRUCTOR_TITULO)}`} loading="lazy" />
+                <img src="/assets/certificado-d5-2026.webp" alt={`Certificado de D5 Inc. que acredita a Pedro Sardi como ${enFrase(INSTRUCTOR_TITULO)}`} loading="lazy" />
                 <div className="cert-seal" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
                 </div>
