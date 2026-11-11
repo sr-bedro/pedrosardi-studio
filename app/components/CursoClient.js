@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { IMUTES_CURSO, CURSO_IMUTES, capitalizar, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, INSTRUCTOR_IMUTES, enFrase } from '../lib/site'
+import { IMUTES_CURSO, IMUTES_TALLER, CURSO_EXPRESS, CURSO_IMUTES, capitalizar, INSTRUCTOR_TITULO, INSTRUCTOR_TITULO_CORTO, INSTRUCTOR_IMUTES, enFrase } from '../lib/site'
 
 // "5 h 39 min" -> ['5','h','39','min']: los números van grandes y las unidades en el <em> chico
 const duracionPartes = CURSO_IMUTES.duracion.split(' ')
@@ -208,6 +208,21 @@ const css = `
   .aud-text h4 { font-family:var(--font-playfair), serif;font-size:1rem;font-weight:400;color:var(--fg);margin-bottom:5px; }
   .aud-text p { font-size:.78rem;line-height:1.72;color:var(--muted); }
 
+  #mas { background: var(--bg2); padding: 100px 52px; }
+  .mas-hd { max-width: 1080px; margin: 0 auto 44px; }
+  .mas-hd .disp { font-size: clamp(2rem,4vw,3.4rem); }
+  .mas-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .mas-card { background: var(--bg3); border: 1px solid var(--border); padding: 36px 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .mas-card h3 { font-family: var(--font-playfair), serif; font-size: 1.35rem; font-weight: 400; line-height: 1.25; color: var(--fg); }
+  .mas-card p { font-size: .85rem; line-height: 1.72; color: rgba(237,233,225,.64); }
+  .mas-card .mas-act { margin-top: auto; padding-top: 10px; }
+  .mas-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px; background: var(--gold); color: #080807; font-size: .62rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, box-shadow .3s; }
+  .mas-btn:hover { background: #c9a470; box-shadow: 0 8px 24px rgba(185,148,96,.25); }
+  .mas-link { display: inline-flex; align-items: center; gap: 10px; padding: 13px 0 4px; color: var(--gold); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; border-bottom: 1px solid rgba(185,148,96,.4); transition: border-color .3s, color .3s; }
+  .mas-link:hover { color: #c9a470; border-color: #c9a470; }
+  .mas-btn svg, .mas-link svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .mas-btn:focus-visible, .mas-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
   #cta-final { background:var(--bg);padding:130px 52px;text-align:center;position:relative;overflow:hidden; }
   #cta-final::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(185,148,96,.06) 0%,transparent 65%);pointer-events:none; }
   .cta-title { font-family:var(--font-playfair), serif;font-size:clamp(2.8rem,7vw,7rem);font-weight:400;line-height:1;letter-spacing:-.02em;color:var(--fg);margin-bottom:20px;position:relative;z-index:1; }
@@ -250,6 +265,9 @@ const css = `
     .prev-hd { flex-direction: column; gap: 18px; align-items: flex-start; }
     .prev-grid { grid-template-columns: 1fr; }
     #audience { grid-template-columns: 1fr; gap: 36px; padding: 64px 24px; }
+    #mas { padding: 64px 24px; }
+    .mas-grid { grid-template-columns: 1fr; }
+    .mas-card { padding: 28px 22px; }
     #cta-final { padding: 80px 24px; }
     .cta-title { font-size: clamp(2.4rem,10vw,4rem); }
     #footer { flex-direction: column; gap: 12px; text-align: center; padding: 22px; }
@@ -510,6 +528,35 @@ export default function CursoClient() {
           <div className="aud-item a d1"><div className="aud-icon">✦</div><div className="aud-text"><h4>Estudiante de arquitectura</h4><p>Que quiere incorporar visualización fotorrealista a sus entregas y diferenciarse desde el primer trabajo.</p></div></div>
           <div className="aud-item a d2"><div className="aud-icon">✦</div><div className="aud-text"><h4>Usuario de SketchUp o Revit</h4><p>Que ya modela bien pero quiere llevar sus presentaciones a otro nivel con D5 Render de forma rápida.</p></div></div>
           <div className="aud-item a d3"><div className="aud-icon">✦</div><div className="aud-text"><h4>Alguien que intentó aprender solo</h4><p>Y se perdió entre tutoriales en inglés, workflows confusos y resultados que no convencen a los clientes.</p></div></div>
+        </div>
+      </section>
+
+      {/* MÁS FORMAS DE APRENDER */}
+      <section id="mas">
+        <div className="mas-hd"><p className="lbl a">Más opciones</p><h2 className="disp a d1">Más formas<br />de <em>aprender.</em></h2></div>
+        <div className="mas-grid">
+          <div className="mas-card a d1">
+            <span className="lbl">Taller en vivo</span>
+            <h3>Aprendé D5 Render para SketchUp desde 0 a avanzado</h3>
+            <p>Clases en vivo todas las semanas, desde cero hasta avanzado. Fechas y detalles en IMUTES.</p>
+            <div className="mas-act">
+              <a href={IMUTES_TALLER} target="_blank" rel="noopener" className="mas-btn">
+                Ver el taller en IMUTES
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </a>
+            </div>
+          </div>
+          <div className="mas-card a d2">
+            <span className="lbl">Curso express</span>
+            <h3>¿Querés empezar rápido?</h3>
+            <p>Curso express de render de interiores: {CURSO_EXPRESS.clases} clases, {CURSO_EXPRESS.minutos} minutos.</p>
+            <div className="mas-act">
+              <Link href={CURSO_EXPRESS.ruta} className="mas-link">
+                Ver el curso express
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

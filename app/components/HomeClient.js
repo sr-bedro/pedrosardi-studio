@@ -75,11 +75,11 @@ const css = `
     #menu-btn.open span:nth-child(2) { width: 0; opacity: 0; }
     #menu-btn.open span:nth-child(3) { width: 20px; transform: rotate(40deg) translateY(-1px); background: var(--gold); }
     #mobile-menu { display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 490; background: rgba(11,11,10,.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(185,148,96,.15); padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.25,.46,.45,.94), padding .5s; }
-    #mobile-menu.open { max-height: 440px; padding-top: 80px; padding-bottom: 36px; }
+    #mobile-menu.open { max-height: 540px; padding-top: 80px; padding-bottom: 36px; }
     #mobile-menu nav { display: flex; flex-direction: column; }
     #mobile-menu a { display: flex; align-items: center; justify-content: space-between; font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(237,233,225,.6); padding: 16px 0; border-bottom: 1px solid rgba(237,233,225,.05); opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .4s, color .3s, padding-left .3s; }
     #mobile-menu.open a { opacity: 1; transform: none; }
-    #mobile-menu.open a:nth-child(1){transition-delay:.06s} #mobile-menu.open a:nth-child(2){transition-delay:.12s} #mobile-menu.open a:nth-child(3){transition-delay:.18s} #mobile-menu.open a:nth-child(4){transition-delay:.24s} #mobile-menu.open a:nth-child(5){transition-delay:.30s}
+    #mobile-menu.open a:nth-child(1){transition-delay:.06s} #mobile-menu.open a:nth-child(2){transition-delay:.12s} #mobile-menu.open a:nth-child(3){transition-delay:.18s} #mobile-menu.open a:nth-child(4){transition-delay:.24s} #mobile-menu.open a:nth-child(5){transition-delay:.30s} #mobile-menu.open a:nth-child(6){transition-delay:.36s}
     #mobile-menu a:last-child { border-bottom: none; }
     #mobile-menu a:hover { color: var(--fg); padding-left: 6px; }
     #mobile-menu a::after { content: '→'; font-size: .7rem; color: transparent; transition: color .3s, transform .3s; }
@@ -87,6 +87,7 @@ const css = `
     #mobile-menu a.curso-link { color: var(--gold); border: 1px solid rgba(185,148,96,.18); padding: 14px 18px; margin-top: 12px; border-bottom: 1px solid rgba(185,148,96,.18) !important; }
     #mobile-menu a.curso-link:hover { background: rgba(185,148,96,.06); padding-left: 22px; }
     #mobile-menu a.curso-link::after { content: '↗'; color: rgba(185,148,96,.5); }
+    #mobile-menu a.curso-link + a.curso-link { margin-top: 8px; }
   }
 
   /* ═══ FULLPAGE SCROLL ═══ */
@@ -651,6 +652,7 @@ export default function HomeClient() {
         <a href="#hero" className="nav-logo">Pedro Sardi</a>
         <ul className="nav-links r">
           <li><a href="#services">Servicios</a></li>
+          <li><a href="/cursos/d5-render-express" className="curso-link">Curso express</a></li>
           <li><a href="#contact">Contacto</a></li>
         </ul>
         <button id="menu-btn" aria-label="Abrir menú" aria-expanded="false">
@@ -666,6 +668,7 @@ export default function HomeClient() {
           <a href="#services">Servicios</a>
           <a href="#contact">Contacto</a>
           <a href="/curso-d5render" className="curso-link">Curso D5 Render</a>
+          <a href="/cursos/d5-render-express" className="curso-link">Curso express</a>
         </nav>
       </div>
 
