@@ -20,5 +20,11 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/cursos/d5-render-express`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

@@ -6,6 +6,7 @@
 export const IMUTES_ORIGIN = 'https://www.imutes.online'
 export const IMUTES_CURSO = 'https://www.imutes.online/cursos/renderiza-como-un-profesional-curso-de-d5-render-para-sketchup'
 export const IMUTES_TALLER = 'https://www.imutes.online/talleres/aprende-d5-render-para-sketchup-desde-0-a-avanzado'
+export const IMUTES_SKETCHUP = 'https://www.imutes.online/cursos/domina-sketchup-tecnicas-basicas-hasta-avanzadas'
 
 // ── Curso pregrabado de IMUTES (datos verificados en la página pública, 10/11/2026)
 // duracion: dato exacto, para stats, chips y totales.
@@ -29,6 +30,19 @@ export const INSTRUCTOR_IMUTES = 'Instructor en IMUTES'
 
 // Pone la primera letra en minúscula (para usar el título dentro de una frase).
 export const enFrase = (s) => s.charAt(0).toLowerCase() + s.slice(1)
+
+// ── Curso express (venta en Hotmart)
+export const CHECKOUT_URL = 'https://pay.hotmart.com/B108210756C'
+export const CURSO_EXPRESS = {
+  nombre: 'D5 Render: tu primer render fotorrealista en 60 minutos (desde SketchUp)',
+  ruta: '/cursos/d5-render-express',
+  precio: 29.99, // USD, pago único
+  precioTexto: '29,99',
+  moneda: 'USD',
+  clases: 8,
+  minutos: 66,
+  garantiaDias: 7, // desde la compra
+}
 
 // ── Sitio y redes
 export const SITE_URL = 'https://pedrosardi.studio'
