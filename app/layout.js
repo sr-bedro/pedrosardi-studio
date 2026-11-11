@@ -27,6 +27,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Pedro Sardi · Visualización Arquitectónica',
   description: `Pedro Sardi — Visualizador arquitectónico e ${enFrase(INSTRUCTOR_TITULO)}. Paraguay.`,
   keywords: 'renders arquitectónicos paraguay, visualizador arquitectónico paraguay, tutor d5 render, instructor d5 render, instructor certificado d5 render, curso d5 render español',

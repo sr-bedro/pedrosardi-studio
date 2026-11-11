@@ -5,6 +5,7 @@ import { INSTRUCTOR_TITULO_CORTO } from './lib/site'
 export const metadata = {
   title: 'Pedro Sardi · Visualización Arquitectónica',
   description: `Renders fotorrealistas y tutorías D5 Render en Paraguay. ${INSTRUCTOR_TITULO_CORTO}. Trabajemos juntos.`,
+  alternates: { canonical: '/' },
 }
 
 export default function Page() {

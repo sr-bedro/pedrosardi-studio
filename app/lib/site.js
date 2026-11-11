@@ -45,7 +45,7 @@ export const CURSO_EXPRESS = {
 }
 
 // ── Sitio y redes
-export const SITE_URL = 'https://pedrosardi.studio'
+export const SITE_URL = 'https://www.pedrosardi.studio'
 export const WHATSAPP_URL = 'https://wa.me/595974534159'
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/pedroesardi/'
 export const INSTAGRAM_URL = 'https://www.instagram.com/pedrosardi.studio/'

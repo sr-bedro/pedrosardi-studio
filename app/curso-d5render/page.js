@@ -4,6 +4,7 @@ import { IMUTES_ORIGIN, IMUTES_CURSO, SITE_URL, CURSO_IMUTES, capitalizar, INSTR
 export const metadata = {
   title: `Masterclass D5 Render · Pedro Sardi — ${INSTRUCTOR_TITULO_CORTO}`,
   description: `Curso completo de D5 Render en español. ${capitalizar(CURSO_IMUTES.duracionVenta)} de clases paso a paso por Pedro Sardi, ${enFrase(INSTRUCTOR_TITULO)}. Desde cero hasta el render final profesional.`,
+  alternates: { canonical: '/curso-d5render' },
   keywords: 'curso d5 render español, masterclass d5 render, tutor d5 render, instructor d5 render, instructor certificado d5 render, aprender d5 render, curso renders arquitectónicos paraguay',
   openGraph: {
     title: `Masterclass D5 Render · Pedro Sardi — ${INSTRUCTOR_TITULO_CORTO}`,
