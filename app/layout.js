@@ -83,7 +83,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
-        <link rel="icon" type="image/png" href="/assets/favicon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
